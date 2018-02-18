@@ -1,0 +1,1 @@
+export const CHANGE_VIEW = 'main/CHANGE_VIEW'
