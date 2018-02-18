@@ -1,12 +1,16 @@
 import { makeDB } from './pg-setupdb'
+import { getPolicy, getAgent, getAgentLogin } from './pg-connector'
 
 export const resolvers = {
     Query: {
         lookupPolicy(parent,args,obj) {
-            return {
-                policyNumber: 100,
-                name: "Anna Bella Corella"
-            }
+            return getPolicy(args.policynumber)
+        },
+        lookupAgent(parent,args,obj) {
+            return getAgent(args.agentid)
+        },
+        lookupAgentLogin(parent,args,obj) {
+            return getAgentLogin(args.agentid, args.password)
         }
     },
     Mutation: {

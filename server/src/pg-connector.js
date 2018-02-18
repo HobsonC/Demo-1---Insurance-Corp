@@ -45,12 +45,12 @@ db.authenticate().then(console.log('db authenticated...'))
 
 const Policy = db.define('policy',
     {
-        policyNumber:   { type: Sequelize.INTEGER, primaryKey: true },
+        policynumber:   { type: Sequelize.INTEGER, primaryKey: true },
         name:           { type: Sequelize.STRING },
         dob:            { type: Sequelize.STRING },
         gender:         { type: Sequelize.STRING },
-        smokingStatus:  { type: Sequelize.STRING },
-        faceAmount:     { type: Sequelize.INTEGER }
+        smokingstatus:  { type: Sequelize.STRING },
+        faceamount:     { type: Sequelize.INTEGER }
     },
     {
         tableName: 'policies',
@@ -60,7 +60,7 @@ const Policy = db.define('policy',
 
 const Agent = db.define('agent',
     {
-        agentID:        { type: Sequelize.INTEGER, primaryKey: true },
+        agentid:        { type: Sequelize.INTEGER, primaryKey: true },
         password:       { type: Sequelize.STRING },
         name:           { type: Sequelize.STRING },
         policies:       { type: Sequelize.ARRAY(Sequelize.INTEGER) }
@@ -87,9 +87,31 @@ const getPolicy = pn => Policy.findById(pn).then(p => p)
 const getAgent = id => Agent.findById(id).then(a => a)
 const getEmployee = id => Employee.findById(id).then(ee => ee)
 
+const getAgentLogin = (id,pwd) => Agent.findById(id)
+        .then(a => {
+            if (a.password === pwd) {
+                return {
+                    idExists: true,
+                    passwordCorrect: true
+                }
+            } else {
+                return {
+                    idExists: true,
+                    passwordCorrect: false
+                }
+            }
+        })
+        .catch(err => {
+            return {
+                idExists: false,
+                passwordCorrect: false
+            }
+        })
+
 export {    getPolicy, 
             getAgent, 
-            getEmployee 
+            getEmployee,
+            getAgentLogin
         }
 
 

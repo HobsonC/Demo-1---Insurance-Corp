@@ -3,12 +3,26 @@ import { resolvers } from './resolvers'
 
 const typeDefs = `
     type Policy {
-        policyNumber: Int!
+        policynumber: Int!
         name: String
     }
 
+    type Agent {
+        agentid: Int!
+        password: String
+        name: String
+        policies: [Int]
+    }
+
+    type LoginStatus {
+        idExists: Boolean
+        passwordCorrect: Boolean
+    }
+
     type Query {
-        lookupPolicy(policyNumber: Int!): Policy
+        lookupPolicy(policynumber: Int!): Policy
+        lookupAgent(agentid: Int!): Agent
+        lookupAgentLogin(agentid: Int!, password: String!): LoginStatus
     }
 
     type Mutation {
