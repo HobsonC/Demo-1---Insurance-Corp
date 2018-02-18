@@ -1,0 +1,3 @@
+"eeID","password","name","readPolicies","writePolicies","readAgents","writeAgents","readReports","writeReports"
+1,"pwd1","Bob",t,t,t,t,t,t
+2,"pwd2","Linda",t,t,t,t,t,t

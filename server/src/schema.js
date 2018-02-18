@@ -10,6 +10,10 @@ const typeDefs = `
     type Query {
         lookupPolicy(policyNumber: Int!): Policy
     }
+
+    type Mutation {
+        createDB: Boolean
+    }
 `
 
 const schema = makeExecutableSchema({ typeDefs, resolvers })

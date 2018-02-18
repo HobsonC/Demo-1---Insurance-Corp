@@ -1,3 +1,5 @@
+import { makeDB } from './pg-setupdb'
+
 export const resolvers = {
     Query: {
         lookupPolicy(parent,args,obj) {
@@ -5,6 +7,11 @@ export const resolvers = {
                 policyNumber: 100,
                 name: "Anna Bella Corella"
             }
+        }
+    },
+    Mutation: {
+        createDB(parent,args,obj) {
+            return makeDB()
         }
     }
 }
