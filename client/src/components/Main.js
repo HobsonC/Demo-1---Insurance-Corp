@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Nav from './Nav'
 import About from './About'
 import AgentLogin from './Agent/AgentLogin'
+import AgentDashboard from './Agent/AgentDashboard'
 import EmployeeLogin from './Employee/EmployeeLogin'
 
 class Main extends Component {
@@ -12,6 +13,9 @@ class Main extends Component {
             switch(this.props.currentView) {
                 case 'AgentLogin':
                 return <AgentLogin />
+
+                case 'AgentDashboard':
+                return <AgentDashboard />
 
                 case 'EmployeeLogin':
                 return <EmployeeLogin />
