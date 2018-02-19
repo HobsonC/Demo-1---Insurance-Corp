@@ -33,8 +33,9 @@ The GraphQL schema has a 'createDB' mutation which:
 
 STEP 2: 
 Run the GraphQL server:
-    (i)  Open command line in 'server' folder and type 'npm start'.
-    (ii) Wait for message 'GraphQL server running on port 4000...'.
+    (i)   Open command line in 'server' folder and enter 'npm install'
+    (ii)  When above is complete enter 'npm start'.
+    (iii) Wait for message 'GraphQL server running on port 4000...'.
 Create the database:
     (i) ...
 

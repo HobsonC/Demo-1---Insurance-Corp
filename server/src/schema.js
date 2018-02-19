@@ -23,6 +23,7 @@ const typeDefs = `
         lookupPolicy(policynumber: Int!): Policy
         lookupAgent(agentid: Int!): Agent
         lookupAgentLogin(agentid: Int!, password: String!): LoginStatus
+        test: Int
     }
 
     type Mutation {

@@ -11,6 +11,9 @@ export const resolvers = {
         },
         lookupAgentLogin(parent,args,obj) {
             return getAgentLogin(args.agentid, args.password)
+        },
+        test(parent,args,obj) {
+            return 123
         }
     },
     Mutation: {
