@@ -5,6 +5,10 @@ const typeDefs = `
     type Policy {
         policynumber: Int!
         name: String
+        dob: String
+        gender: String
+        smokingstatus: String
+        faceamount: Int
     }
 
     type Agent {
