@@ -18,6 +18,12 @@ const typeDefs = `
         policies: [Int]
     }
 
+    type Employee {
+        eeid: Int!
+        password: String
+        name: String
+    }
+
     type LoginStatus {
         idExists: Boolean
         passwordCorrect: Boolean
@@ -27,6 +33,8 @@ const typeDefs = `
         lookupPolicy(policynumber: Int!): Policy
         lookupAgent(agentid: Int!): Agent
         lookupAgentLogin(agentid: Int!, password: String!): LoginStatus
+        lookupEmployee(eeid: Int!): Employee
+        lookupEmployeeLogin(eeid: Int!, password: String!): LoginStatus
         test: Int
     }
 

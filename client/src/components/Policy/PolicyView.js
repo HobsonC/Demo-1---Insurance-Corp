@@ -26,7 +26,7 @@ class PolicyView extends Component {
             if (!data.lookupPolicy) return <div><p>Select Valid Policy</p></div>
 
             return (
-                <div className="card indigo darken-4">
+                <div className="card indigo darken-3">
                 <div className="card-content white-text">
                 <span className="card-title"><b>Policy {data.lookupPolicy.policynumber}</b></span>
                 <p>Name: {data.lookupPolicy.name}</p>

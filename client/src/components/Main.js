@@ -5,6 +5,7 @@ import About from './About'
 import AgentLogin from './Agent/AgentLogin'
 import AgentDashboard from './Agent/AgentDashboard'
 import EmployeeLogin from './Employee/EmployeeLogin'
+import EmployeeDashboard from './Employee/EmployeeDashboard'
 
 class Main extends Component {
     render() {
@@ -19,6 +20,9 @@ class Main extends Component {
 
                 case 'EmployeeLogin':
                 return <EmployeeLogin />
+                      
+                case 'EmployeeDashboard':
+                return <EmployeeDashboard />
 
                 default:
                 return <About />

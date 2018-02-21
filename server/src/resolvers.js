@@ -1,5 +1,5 @@
 import { makeDB } from './pg-setupdb'
-import { getPolicy, getAgent, getAgentLogin } from './pg-connector'
+import { getPolicy, getAgent, getAgentLogin, getEmployee, getEmployeeLogin } from './pg-connector'
 
 export const resolvers = {
     Query: {
@@ -11,6 +11,12 @@ export const resolvers = {
         },
         lookupAgentLogin(parent,args,obj) {
             return getAgentLogin(args.agentid, args.password)
+        },
+        lookupEmployee(parent,args,obj) {
+            return getEmployee(args.eeid)
+        },
+        lookupEmployeeLogin(parent,args,obj) {
+            return getEmployeeLogin(args.eeid,args.password)
         },
         test(parent,args,obj) {
             return 123

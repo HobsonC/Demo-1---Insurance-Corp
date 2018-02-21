@@ -73,7 +73,7 @@ const Agent = db.define('agent',
 
 const Employee = db.define('employee',
     {
-        eeID:       { type: Sequelize.INTEGER, primaryKey: true },
+        eeid:       { type: Sequelize.INTEGER, primaryKey: true },
         password:   { type: Sequelize.STRING },
         name:       { type: Sequelize.STRING }
     },
@@ -108,10 +108,31 @@ const getAgentLogin = (id,pwd) => Agent.findById(id)
             }
         })
 
+const getEmployeeLogin = (id,pwd) => Employee.findById(id)
+        .then(ee => {
+            if (ee.password === pwd) {
+                return {
+                    idExists: true,
+                    passwordCorrect: true
+                }
+            }
+            return {
+                idExists: true,
+                passwordCorrect: false
+            }
+        })
+        .catch(err => {
+            return {
+                idExists: false,
+                passwordCorrect: false
+            }
+        })
+
 export {    getPolicy, 
             getAgent, 
             getEmployee,
-            getAgentLogin
+            getAgentLogin,
+            getEmployeeLogin
         }
 
 

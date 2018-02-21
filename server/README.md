@@ -1,9 +1,10 @@
 # dem01insurance
-# Author: _
+# Author: Me
 
 1. PURPOSE
 2. INSTRUCTIONS
 3. COMMENTS
+4. HOW STUFF WORKS
 
 1. PURPOSE
 ================================================================================
@@ -44,7 +45,9 @@ Create the database:
 This is a demo and shouldn't actually be used: it lacks proper security (eg web tokens) and is ugly and lacks proper testing and real world testing and refining.
 This is not intended as the best solution for a company database and login system, just to demonstrate a way that multiple technologies can be used together.
 
-
+4. HOW STUFF WORKS
+================================================================================
+Data for policies, agents, employees, premium rates, etc, lives in csv files in the 'data' folder. The first step is to create a new database with tables based on these csv files. This is done with the script 'pg-setupdb', and is triggered by the mutation 'createDB' in the 'schema' file. The scripts are set up for using PostgreSQL as the database management system. The app interacts with the database via graphql queries and muations in the 'schema' folder. The resolvers use the 'pg-connector', which uses the ORM Sequelize (which can be also be used for MySQL, SQLite and MSSQL). 
 
 
 

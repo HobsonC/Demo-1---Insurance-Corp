@@ -22,9 +22,19 @@ class Nav extends Component {
 
     render() {
         const agentLoginLogout = () => {
+            if (this.props.currentView === 'EmployeeDashboard')
+            return ; 
             return this.props.currentID === 0
-            ? <a onClick={() => this.showView('AgentLogin')}>Agent Login</a>
-            : <a onClick={() => this.logout()}>Log Out</a>
+            ? <li><a onClick={() => this.showView('AgentLogin')}>Agent Login</a></li>
+            : <li><a onClick={() => this.logout()}>Log Out</a></li>
+        }
+
+        const eeLoginLogout = () => {
+            if (this.props.currentView === 'AgentDashboard')
+            return ;
+            return this.props.currentID === 0
+            ? <li><a onClick={() => this.showView('EmployeeLogin')}>Employee Login</a></li>
+            : <li><a onClick={() => this.logout()}>Log Out</a></li>
         }
 
         return (
@@ -33,19 +43,12 @@ class Nav extends Component {
                 <a className="brand-logo left">Milky Way Insurance Inc.</a>
                 <ul className="right hide-on-med-and-down">
                     <li><a onClick={() => this.showView('About')}>About</a></li>
-                    <li>{ agentLoginLogout() }</li>
-                    <li><a onClick={() => this.showView('EmployeeLogin')}>Employee Login</a></li>
+                    { agentLoginLogout() }
+                    { eeLoginLogout() }
                 </ul>
                 </div>
             </nav>
         )
-    }
-}
-
-const styles = {
-    viewtype: {
-        color: 'gold',
-        
     }
 }
 

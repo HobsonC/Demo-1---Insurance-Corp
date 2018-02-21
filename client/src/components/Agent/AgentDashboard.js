@@ -117,8 +117,8 @@ class AgentDashboard extends Component {
 
 const styles = {
     select: {
-        background: '#43a047',
-        color: '#fff',
+        background: '#222',
+        color: '#ffe299',
         height: '34px',
         width: '240px'
     }
