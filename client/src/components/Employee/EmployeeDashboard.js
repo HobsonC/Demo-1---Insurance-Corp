@@ -4,6 +4,7 @@ import { Query } from 'react-apollo'
 import { gql } from 'apollo-boost'
 import PolicyView from '../Policy/PolicyView'
 import AgentView from '../Agent/AgentView'
+import StatsView from '../Policy/StatsView'
 
 class EmployeeDashboard extends Component {
     constructor(props) {
@@ -13,6 +14,10 @@ class EmployeeDashboard extends Component {
             agentID: 0,
             viewType: 'None'
         }
+    }
+
+    changeViewType(newType) {
+        this.setState({ viewType: newType })
     }
 
     showPolicy(e) {
@@ -77,9 +82,11 @@ class EmployeeDashboard extends Component {
         </Query>
 
         const selectViewer = () => {
-            <select style={styles.select} id="select_viewer" ref="select_viewer" className="browser-default">
-                <option key={0}>View Agent</option>
-                <option key={1}>View Policy</option>
+            return <select style={styles.select} id="select_viewer" ref="select_viewer" className="browser-default">
+                <option key={0} select="true">Select Action:</option>
+                <option onClick={() => {this.changeViewType('Agent')}} key={1}>View Agent</option>
+                <option onClick={() => {this.changeViewType('Policy')}} key={2}>View Policy</option>
+                <option onClick={() => {this.changeViewType('Stats')}} key={3}>View Policy Statistics</option>
             </select>
         }
 
@@ -100,6 +107,7 @@ class EmployeeDashboard extends Component {
             return (
                 <div>
                     <form onSubmit={ this.showAgent.bind(this) }>
+                    <label>Agent</label>
                     <input type="text" className="validate" ref="agid" />
                     <input type="submit" className="btn waves-effect" value="View Agent" />
                     </form>
@@ -116,16 +124,20 @@ class EmployeeDashboard extends Component {
                 case 'Policy':
                 return renderPolicyViewer()
 
+                case 'Stats':
+                return <StatsView />
+
                 default:
                 return <div>Select View Above</div>
             }
         }
 
         return (
-        <div>
-            { renderEE() }
-            { renderAgentViewer() }
-        </div>
+            <div>
+                { renderEE() }
+                { selectViewer() }
+                { renderViewer() }
+            </div>
         )
     }
 }

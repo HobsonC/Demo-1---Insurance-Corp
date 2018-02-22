@@ -1,5 +1,5 @@
 import { makeDB } from './pg-setupdb'
-import { getPolicy, getAgent, getAgentLogin, getEmployee, getEmployeeLogin } from './pg-connector'
+import { getPolicy, getAgent, getAgentLogin, getEmployee, getEmployeeLogin, getMonthlyPremiumPerThousand } from './pg-connector'
 
 export const resolvers = {
     Query: {
@@ -18,8 +18,8 @@ export const resolvers = {
         lookupEmployeeLogin(parent,args,obj) {
             return getEmployeeLogin(args.eeid,args.password)
         },
-        test(parent,args,obj) {
-            return 123
+        lookupMonthlyPremiumPerThousand(parent,args,obj) {
+            return getMonthlyPremiumPerThousand(args.age,args.gender,args.smoker)
         }
     },
     Mutation: {

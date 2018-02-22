@@ -6,9 +6,11 @@ const typeDefs = `
         policynumber: Int!
         name: String
         dob: String
+        currentage: Int
         gender: String
         smokingstatus: String
         faceamount: Int
+        monthlypremium: Float
     }
 
     type Agent {
@@ -29,13 +31,17 @@ const typeDefs = `
         passwordCorrect: Boolean
     }
 
+    type Premium {
+        prem_pmonth_pthousandfa: Float
+    }
+
     type Query {
         lookupPolicy(policynumber: Int!): Policy
         lookupAgent(agentid: Int!): Agent
         lookupAgentLogin(agentid: Int!, password: String!): LoginStatus
         lookupEmployee(eeid: Int!): Employee
         lookupEmployeeLogin(eeid: Int!, password: String!): LoginStatus
-        test: Int
+        lookupMonthlyPremiumPerThousand(age: Int!, gender: String!, smoker: String!): Premium
     }
 
     type Mutation {

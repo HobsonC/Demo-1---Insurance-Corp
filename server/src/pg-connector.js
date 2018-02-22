@@ -1,4 +1,5 @@
 import Sequelize from 'sequelize'
+import { getCurrentAge } from './datelib'
 
 const Op = Sequelize.Op;
 const operatorsAliases = {
@@ -45,7 +46,7 @@ db.authenticate().then(console.log('db authenticated...'))
 
 const Policy = db.define('policy',
     {
-        policynumber:   { type: Sequelize.INTEGER, primaryKey: true },
+        policynumber:   { type: Sequelize.INTEGER, primaryKey: true }, // shouldn't do, should add index col for pk
         name:           { type: Sequelize.STRING },
         dob:            { type: Sequelize.STRING },
         gender:         { type: Sequelize.STRING },
@@ -83,7 +84,46 @@ const Employee = db.define('employee',
     }
 )
 
-const getPolicy = pn => Policy.findById(pn).then(p => p)
+const MonthlyPremium = db.define('premium',
+    {
+        age:                        { type: Sequelize.INTEGER, primaryKey: true },
+        gender:                     { type: Sequelize.STRING },
+        smoker:                     { type: Sequelize.BOOLEAN },
+        prem_pmonth_pthousandfa:    { type: Sequelize.FLOAT }
+    },
+    {
+        tableName: 'prem_rates',
+        timestamps: false
+    }
+)
+
+const getMonthlyPremiumPerThousand = (age,gender,smk) => MonthlyPremium.findOne({
+    where: {
+        age: age,
+        gender: gender,
+        smoker: smk === "Smoker"
+        }
+    })
+    .then(prem =>  {
+        return prem.prem_pmonth_pthousandfa
+    })
+    .catch(err => 0.00)
+
+const getPolicy = pn => {
+    let pol = {}
+    return Policy.findById(pn)
+    .then(p => {
+        pol = p.dataValues
+        const age = getCurrentAge(p.dob)
+        pol.currentage = age
+        return getMonthlyPremiumPerThousand(age,pol.gender,pol.smokingstatus)
+    })
+    .then(prem => {
+        pol.monthlypremium = Math.round(prem * pol.faceamount / 10) / 100
+        return pol
+    })
+}
+
 const getAgent = id => Agent.findById(id).then(a => a)
 const getEmployee = id => Employee.findById(id).then(ee => ee)
 
@@ -132,7 +172,8 @@ export {    getPolicy,
             getAgent, 
             getEmployee,
             getAgentLogin,
-            getEmployeeLogin
+            getEmployeeLogin,
+            getMonthlyPremiumPerThousand
         }
 
 
